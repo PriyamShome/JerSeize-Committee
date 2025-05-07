@@ -2,133 +2,56 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jersey Store</title>
-    <link rel="stylesheet" href="/css/navandfoot.css">
-    <link rel="stylesheet" href="/css/firstpage.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jersey Store</title>
+  <link rel="stylesheet" href="/css/navandfoot.css">
+  <link rel="stylesheet" href="/css/firstpage.css">
 </head>
 
 <body>
-    <nav>
-        <div class="logo">
-            <a href="/">Home</a>
-        </div>
-        <div class="search">
-            <input type="text" id="searchInput" class="nav-search-input" placeholder="Search">
-            <a href="#" class="nav-search-icon">
-                <img src="/assets/search_icon.png" alt="search-icon" class="nav-search-icon">
-            </a>
-        </div>
-        <% if (user) { %>
-            <a href="/logout" class="account">Logout (<%= user.username %>)</a>
-          <% } else { %>
-            <a href="/signup" class="account">Login / Sign-in</a>
-          <% } %>          
-        <a href="#" class="cart">
-            <img src="/assets/cart_icon.png" alt="cart-icon">
-            Cart
-        </a>
-    </nav>
-
-    <!-- Add this where you want to show the username -->
+  <nav>
+    <div class="logo">
+      <a href="/">Home</a>
+    </div>
+    <div class="search">
+      <input type="text" id="searchInput" class="nav-search-input" placeholder="Search">
+      <a href="#" class="nav-search-icon">
+        <img src="/assets/search_icon.png" alt="search-icon">
+      </a>
+    </div>
     <% if (user) { %>
-        <div class="welcome">Welcome, <%= user.username %>!</div>
-        <% } else { %>
-            <div class="welcome">Welcome, Guest!</div>
-            <% } %>
+      <a href="/logout" class="account">Logout (<%= user.username %>)</a>
+    <% } else { %>
+      <a href="/signup" class="account">Login / Sign-in</a>
+    <% } %>
+    <a href="/cart" class="cart">
+      <img src="/assets/cart_icon.png" alt="cart-icon">
+      Cart
+    </a>
+  </nav>
 
+  <div class="welcome">
+    <% if (user) { %>
+      Welcome, <%= user.username %>!
+    <% } else { %>
+      Welcome, Guest!
+    <% } %>
+  </div>
 
-                <div class="cards">
-                    <div class="card">
-                        <figure>
-                            <img src="/assets/1.jpg" alt="Dortmund Jersey">
-                        </figure>
-                        <figcaption>
-                            <h3>Dortmund Jersey</h3>
-                            Rs 899 + shipping
-                            <h5>15% off</h5>
-                        </figcaption>
-                    </div>
+  <div class="cards" id="productContainer">
+    <!-- Products will be injected here dynamically -->
+  </div>
 
-                    <div class="card">
-                        <figure>
-                            <img src="/assets/2.jpg" alt="Real Madrid">
-                        </figure>
-                        <figcaption>
-                            <h3>Real Madrid</h3>
-                            Rs 899 + shipping
-                            <h5>15% off</h5>
-                        </figcaption>
-                    </div>
+  <footer>
+    <textarea name="feedback" id="101" placeholder="Please enter your feedback" rows="5"></textarea>
+    <input type="submit" value="Submit" id="foot-submit">
+    <div>Contact us:</div>
+  </footer>
 
-                    <div class="card">
-                        <figure>
-                            <img src="/assets/3.jpg" alt="FC Bayern Munich">
-                        </figure>
-                        <figcaption>
-                            <h3>FC Bayern Munich</h3>
-                            Rs 899 + shipping
-                            <h5>15% off</h5>
-                        </figcaption>
-                    </div>
-
-                    <div class="card">
-                        <figure>
-                            <img src="/assets/4.jpg" alt="Real Madrid">
-                        </figure>
-                        <figcaption>
-                            <h3>Real Madrid</h3>
-                            Rs 899 + shipping
-                            <h5>15% off</h5>
-                        </figcaption>
-                    </div>
-
-                    <div class="card">
-                        <figure>
-                            <img src="/assets/5.jpg" alt="Arsenal Jersey">
-                        </figure>
-                        <figcaption>
-                            <h3>Arsenal Jersey</h3>
-                            Rs 899 + shipping
-                            <h5>15% off</h5>
-                        </figcaption>
-                    </div>
-
-                    <div class="card">
-                        <figure>
-                            <img src="/assets/6.jpg" alt="FC Bayern Munich">
-                        </figure>
-                        <figcaption>
-                            <h3>FC Bayern Munich</h3>
-                            Rs 899 + shipping
-                            <h5>15% off</h5>
-                        </figcaption>
-                    </div>
-                </div>
-
-                <footer>
-                    <textarea name="feedback" id="101" placeholder="Please enter your feedback" rows="5"></textarea>
-                    <input type="submit" value="Submit" id="foot-submit">
-                    <div>Contact us:</div>
-                </footer>
-                
-                <script>
-                    document.getElementById('searchInput').addEventListener('input', function () {
-                        const searchTerm = this.value.toLowerCase();
-                        const cards = document.querySelectorAll('.card');
-                
-                        cards.forEach(card => {
-                            const title = card.querySelector('h3').textContent.toLowerCase();
-                            if (title.includes(searchTerm)) {
-                                card.style.display = 'block';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                    });
-                </script>
-                
+  <!-- Include JS Files -->
+  <script src="/js/products.js"></script>
+  <script src="/js/home.js"></script>
 </body>
 
 </html>
